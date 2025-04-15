@@ -13,7 +13,7 @@ function App() {
   return (
    <div className='flex text-white'>
     <Sidebar />
-    <div className='max-w-5xl my-5 text-neutral-300 mx-auto transition-all duration-3000 flex-1'>
+    <div className='max-w-5xl  text-neutral-300 mx-auto transition-all duration-3000 flex-1'>
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/login" element={<Login />}></Route>
