@@ -1,19 +1,9 @@
 import {Eye,BookKeyIcon,MapPin,Twitter,UserRoundCheck,Users,GitGraph, User} from "lucide-react"
+import useUserStore from "../Store/userStore"
+import { formatMemberSince } from "../utils/function"
 export default function ProfileInfo(){
-    const userProfile = {
-		avatar_url: "https://avatars.githubusercontent.com/u/143891654?v=4",
-		bio: "Wow!",
-		email: "dhruvsahu550@gmail.com",
-		followers: 100,
-		following: 200,
-		html_url: "https://github.com/AbhiN0o",
-		location: "Somewhere, Earth",
-		name: "Abhinav Sahu",
-		public_gists: 100,
-		public_repos: 100,
-		twitter_username: "AbhiN0o",
-		login: "AbhiN0o",
-	};
+    const {userProfile}=useUserStore()
+	console.log(userProfile)
     return(
         <div className="lg:w-1/3 w-full flex flex-col gap-2  lg:sticky md:top-10 ">
             <div className="bg-glass rounded-lg p-4">
@@ -63,7 +53,7 @@ export default function ProfileInfo(){
 				{/* Member Since Date */}
 				<div className='my-2'>
 					<p className='text-gray-600 font-bold text-sm'>Member since</p>
-					<p className='text-sm'>21/04/1021</p>
+					<p className='text-sm'>{formatMemberSince(userProfile.created_at)}</p>
 				</div>
 
 				{/* Email Address */}
