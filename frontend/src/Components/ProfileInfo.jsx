@@ -3,7 +3,6 @@ import useUserStore from "../Store/userStore"
 import { formatMemberSince } from "../utils/function"
 export default function ProfileInfo(){
     const {userProfile}=useUserStore()
-	console.log(userProfile)
     return(
         <div className="lg:w-1/3 w-full flex flex-col gap-2  lg:sticky md:top-10 ">
             <div className="bg-glass rounded-lg p-4">
