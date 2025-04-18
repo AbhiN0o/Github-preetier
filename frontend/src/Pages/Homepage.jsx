@@ -13,13 +13,22 @@ export default function Homepage(){
     const getUserAndRepo =async()=>{
         setLoading();
         try {
-            const userResponse = await fetch("https://api.github.com/users/AbhiN0o");
+            const userResponse = await fetch("https://api.github.com/users/AbhiN0o",{
+                headers:{
+                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
+                }
+            });
             const userprofile=await userResponse.json();
             setUserProfile(userprofile)
 
 
-            const repositories=await fetch('https://api.github.com/users/AbhiN0o/repos')
+            const repositories=await fetch('https://api.github.com/users/AbhiN0o/repos',{
+                headers:{
+                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
+                }
+            })
             const finalRepo=await repositories.json();
+            finalRepo.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
             setUserRepo(finalRepo)
 
         } catch (error) {
@@ -38,22 +47,31 @@ export default function Homepage(){
     const onSearch=async(userId)=>{
         setLoading();
         try {
-            const userResponse = await fetch(`https://api.github.com/users/${userId}`);
+            const userResponse = await fetch(`https://api.github.com/users/${userId}`,{
+                headers:{
+                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
+                }
+                });
             const userprofile=await userResponse.json();
             setUserProfile(userprofile)
 
 
-            const repositories=await fetch(`https://api.github.com/users/${userId}/repos`)
+            const repositories=await fetch(`https://api.github.com/users/${userId}/repos`,{
+                headers:{
+                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
+                }
+            })
             const finalRepo=await repositories.json();
+            finalRepo.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
             setUserRepo(finalRepo)
-            
+            onSort("recent")
         } catch (error) {
             toast.error(error.message)
         }finally{
             setLoading()
         }
     }
-    const [sortType,setSortType]=useState(null)
+    const [sortType,setSortType]=useState("recent")
     const onSort=(sortType)=>{
         if(sortType==="recent"){
             userRepo.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at));//descending order 
@@ -70,10 +88,10 @@ export default function Homepage(){
     return(
         <div className="m-4">
             <Search onSearch={onSearch}/>
-            {userRepo.length>0 && <SortRepos onSort={onSort} sortType={sortType} />}
+            {userRepo?.length>0 && <SortRepos onSort={onSort} sortType={sortType} />}
             <div className="flex flex-col gap-4 lg:flex-row justify-center items-start mx-auto">
                {loadingUsers ? <Spinner /> : (<><ProfileInfo />
-                <Repos /> </>)}
+                <Repos explorePage={false}/> </>)}
             </div>
         </div>
     )

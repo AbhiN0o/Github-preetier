@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {Home,Heart,Compass,LogIn,SquareArrowUpRight} from "lucide-react" 
 import Logout from "./Logout";
 export default function Sidebar(){
-    const authUser=false;
+    const authUser=true;
     return(
         <aside className="flex flex-col items-center min-w-12 sm:w-16 sticky top-0 left-0 h-screen py-8 overflow-y-auto border-r bg-glass">
             <nav className="h-full flex flex-col gap-3">
@@ -16,7 +16,7 @@ export default function Sidebar(){
                     <Heart/>
                 </Link>}
                 {authUser && (
-                    <Link to="/" className=" p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800">
+                    <Link to="/explore" className=" p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800">
                     <Compass/>
                 </Link>
                 )}
