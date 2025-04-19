@@ -13,24 +13,11 @@ export default function Homepage(){
     const getUserAndRepo =async()=>{
         setLoading();
         try {
-            const userResponse = await fetch("https://api.github.com/users/AbhiN0o",{
-                headers:{
-                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
-                }
-            });
-            const userprofile=await userResponse.json();
-            setUserProfile(userprofile)
-
-
-            const repositories=await fetch('https://api.github.com/users/AbhiN0o/repos',{
-                headers:{
-                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
-                }
-            })
-            const finalRepo=await repositories.json();
-            finalRepo.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
-            setUserRepo(finalRepo)
-
+            const userResponse = await fetch("http://localhost:2222/api/users/profile/Abhin0o");
+            const {userProfile,userRepos}=await userResponse.json();
+            setUserProfile(userProfile)
+            userRepos.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
+            setUserRepo(userRepos)
         } catch (error) {
             toast.error(error.message)
         }finally{
@@ -47,24 +34,12 @@ export default function Homepage(){
     const onSearch=async(userId)=>{
         setLoading();
         try {
-            const userResponse = await fetch(`https://api.github.com/users/${userId}`,{
-                headers:{
-                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
-                }
-                });
-            const userprofile=await userResponse.json();
-            setUserProfile(userprofile)
-
-
-            const repositories=await fetch(`https://api.github.com/users/${userId}/repos`,{
-                headers:{
-                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
-                }
-            })
-            const finalRepo=await repositories.json();
-            finalRepo.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
-            setUserRepo(finalRepo)
-            onSort("recent")
+            const userResponse = await fetch(`http://localhost:2222/api/users/profile/${userId}`);
+            const {userProfile,userRepos}=await userResponse.json();
+            setUserProfile(userProfile)
+            userRepos.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
+            setUserRepo(userRepos)
+            setSortType("recent")
         } catch (error) {
             toast.error(error.message)
         }finally{

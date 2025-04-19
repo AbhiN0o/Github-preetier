@@ -14,7 +14,6 @@ export const getUserProfileAndRepos= async(req,res)=>{
             }
         })
         const userRepos=await repos.json()
-
         res.status(200).json({userProfile,userRepos})
     } catch (error) {
         res.status(500).json({message:error.message})

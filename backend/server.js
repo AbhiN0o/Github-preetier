@@ -1,11 +1,12 @@
 import express from "express"
 import userRoutes from "../backend/routes/user.route.js"
 import dotenv from "dotenv"
-
+import cors from "cors"
 dotenv.config()
 const app=express()
 const PORT=2222
 
+app.use(cors())
 app.use("/api/users",userRoutes)
 
 
