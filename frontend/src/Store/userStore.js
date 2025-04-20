@@ -1,6 +1,17 @@
 import {create} from "zustand"
 
 const useUserStore=create((set,get)=>({
+    authUser:null,
+    setAuthUser:(user)=>{
+        set({authUser:user})
+    },
+    loading:true,
+    setLoadingPage:(state)=>{
+
+        set({loading:state})
+        
+    },
+
     userProfile:{},
     setUserProfile:(newProfile)=>{
         set({userProfile:newProfile})
