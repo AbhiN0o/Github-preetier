@@ -3,6 +3,7 @@ import userRoutes from "../backend/routes/user.route.js"
 import exploreRoutes from "../backend/routes/explore.route.js"
 import dotenv from "dotenv"
 import cors from "cors"
+import {mongooseConnect} from "./db/connectDB.js"
 dotenv.config()
 const app=express()
 const PORT=2222
@@ -20,4 +21,5 @@ app.get("/",(req,res)=>{
 
 app.listen(PORT,()=>{
     console.log("Server started at PORT:",PORT)
+    mongooseConnect();
 })
