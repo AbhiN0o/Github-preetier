@@ -1,5 +1,6 @@
 import express from "express"
 import userRoutes from "../backend/routes/user.route.js"
+import exploreRoutes from "../backend/routes/explore.route.js"
 import dotenv from "dotenv"
 import cors from "cors"
 dotenv.config()
@@ -8,6 +9,8 @@ const PORT=2222
 
 app.use(cors())
 app.use("/api/users",userRoutes)
+app.use("/api/explore",exploreRoutes)
+
 
 
 app.get("/",(req,res)=>{

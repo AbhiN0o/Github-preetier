@@ -15,13 +15,9 @@ export default function ExplorePage(){
     const handleClick=async(lang)=>{
         setLoading(true)
         try {
-            const repo=await fetch(`https://api.github.com/search/repositories?q=language:${lang}&sort=stars&order=desc&per_page=10`,{
-                headers:{
-                    authorization:`token ${import.meta.env.VITE_GITHUB_API}`
-                }
-            })
+            const repo=await fetch(`http://localhost:2222/api/explore/repos/${lang}`)
             const finalRepo=await repo.json()
-            setUserRepo(finalRepo.items)
+            setUserRepo(finalRepo)
             setSelectedLanguage(lang)
         } catch (error) {
             toast.error(error.message)
