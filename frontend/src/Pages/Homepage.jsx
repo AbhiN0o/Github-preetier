@@ -9,11 +9,12 @@ import Spinner from "../Components/Spinner"
 
 
 export default function Homepage(){
-    const {userProfile,setUserProfile,userRepo,setUserRepo,loadingUsers,setLoading}=useUserStore();
+    const {userProfile,setUserProfile,userRepo,setUserRepo,loadingUsers,setLoading,authUser}=useUserStore();
+    console.log(authUser)
     const getUserAndRepo =async()=>{
         setLoading();
         try {
-            const userResponse = await fetch("http://localhost:2222/api/users/profile/Abhin0o");
+            const userResponse = await fetch(`/api/users/profile/${authUser.username}`);
             const {userProfile,userRepos}=await userResponse.json();
             setUserProfile(userProfile)
             userRepos.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))
@@ -35,7 +36,7 @@ export default function Homepage(){
     const onSearch=async(userId)=>{
         setLoading();
         try {
-            const userResponse = await fetch(`http://localhost:2222/api/users/profile/${userId}`);
+            const userResponse = await fetch(`/api/users/profile/${userId}`);
             const {userProfile,userRepos}=await userResponse.json();
             setUserProfile(userProfile)
             userRepos.sort((a,b)=>new Date (b.created_at)-new Date(a.created_at))

@@ -1,9 +1,9 @@
 import {Github} from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 export default function Login(){
     const handleLoginWithGithub=async()=>{
-        window.open("http://localhost:2222/api/auth/github","_self")
+        window.open("/api/auth/github","_self")
     }
     return(
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-8">
@@ -19,7 +19,7 @@ export default function Login(){
                     </button>
                     <p className="text-sm text-center font-light text-gray-500">
                         Don't have an account?
-                        <Link className="text-blue-600 font-medium pl-1 hover:underline">
+                        <Link className="text-blue-600 font-medium pl-1 hover:underline" to={"/signup"}>
                         Signup
                         </Link>
                     </p>

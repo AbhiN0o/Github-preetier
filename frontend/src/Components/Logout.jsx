@@ -5,7 +5,7 @@ export default function Logout(){
     const {authUser,setAuthUser}=useUserStore()
     const handleLogout=async()=>{
         try {
-            const res=await fetch("http://localhost:2222/api/auth/logout",{credentials:'include'})
+            const res=await fetch("/api/auth/logout",{credentials:'include'})
             const response=await res.json();
             toast.success(response.message)
             setAuthUser(null)

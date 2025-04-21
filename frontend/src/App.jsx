@@ -17,7 +17,7 @@ function App() {
     setLoadingPage(true)
     try {
 
-      const user=await fetch("http://localhost:2222/api/auth/check", {
+      const user=await fetch("/api/auth/check", {
         credentials: 'include'
       })
       const finalUser=await user.json()

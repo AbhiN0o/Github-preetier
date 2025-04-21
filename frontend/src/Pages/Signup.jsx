@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function Signup(){
     const handleLoginWithGithub=async()=>{
-        window.open("http://localhost:2222/api/auth/github","_self")
+        window.open("/api/auth/github","_self")
     }
 
     return(

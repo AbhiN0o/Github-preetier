@@ -6,7 +6,7 @@ export default function LikeProfile(){
 
     const handleLikeProfile=async(userProfile)=>{
         try {
-            const res=await fetch(`http://localhost:2222/api/users/like/${userProfile.login}`,{
+            const res=await fetch(`/api/users/like/${userProfile.login}`,{
                 method:"POST",
                 credentials:'include'
             })

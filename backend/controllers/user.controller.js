@@ -50,6 +50,7 @@ export const likeProfile =async (req,res)=>{
 export const getLikes=async(req,res)=>{
     try {
         const user = await User.findById(req.user._id.toString())
+        console.log(user)
         res.status(200).json({likedBy:user.likedBy})
     } catch (error) {
         res.status(500).json({message:"Error in getting likes"})

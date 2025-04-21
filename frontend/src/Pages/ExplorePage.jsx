@@ -15,7 +15,7 @@ export default function ExplorePage(){
     const handleClick=async(lang)=>{
         setLoading(true)
         try {
-            const repo=await fetch(`http://localhost:2222/api/explore/repos/${lang}`)
+            const repo=await fetch(`/api/explore/repos/${lang}`)
             const finalRepo=await repo.json()
             setUserRepo(finalRepo)
             setSelectedLanguage(lang)
