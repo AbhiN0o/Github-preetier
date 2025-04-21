@@ -1,6 +1,7 @@
-import {Eye,BookKeyIcon,MapPin,Twitter,UserRoundCheck,Users,GitGraph, User} from "lucide-react"
+import {Eye,BookKeyIcon,MapPin,Twitter,UserRoundCheck,Users,GitGraph, User,Heart} from "lucide-react"
 import useUserStore from "../Store/userStore"
 import { formatMemberSince } from "../utils/function"
+import LikeProfile from "./LikeProfile"
 export default function ProfileInfo(){
     const {userProfile}=useUserStore()
     return(
@@ -10,15 +11,18 @@ export default function ProfileInfo(){
                     <a href={userProfile?.html_url} target='_blank' rel='noreferrer'>
                             <img src={userProfile?.avatar_url} className='rounded-md w-24 h-24 mb-2' alt='' />
                     </a>
-                    <div className="flex flex-col items-center gap-2 flex-1">
-                        <a 
-                            href={userProfile.html_url}
-                            target="_blank"
-                            className="bg-glass font-medium w-full text-xs p-2 rounded-md cursor-pointer border border-blue-400 flex items-center gap-2">
-                                <Eye className="size-4.5"/>
-                                View On Github
-                            </a>
-                    </div>
+                    <div className='flex gap-2 items-center flex-col'>
+						<LikeProfile />
+						<a
+							href={userProfile?.html_url}
+							target='_blank'
+							rel='noreferrer'
+							className='bg-glass font-medium w-full text-xs p-2 rounded-md cursor-pointer border border-blue-400 flex items-center gap-2'
+						>
+							<Eye size={16} />
+							View on Github
+						</a>
+					</div>
                 </div>
                 {/* User Bio */}
 				{userProfile?.bio ? (
