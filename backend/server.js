@@ -8,10 +8,13 @@ import session from "express-session"
 import "./passport/github.auth.js"
 import passport from "passport"
 import {mongooseConnect} from "./db/connectDB.js"
+import path from "path"
+
+
 dotenv.config()
 const app=express()
-const PORT=2222
-
+const PORT=process.env.PORT || 2222
+const __dirname=path.resolve()
 app.use(cors({
     origin: 'http://localhost:1234',
     credentials: true
@@ -21,14 +24,16 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use("/api/users",userRoutes)
 app.use("/api/explore",exploreRoutes)
 app.use("/api/auth",authRoutes)
 
+app.use(express.static(path.join(__dirname,"/frontend/dist")));
 
-app.get("/",(req,res)=>{
-    res.send("server is ready")
-})
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 
 app.listen(PORT,()=>{
